@@ -1,0 +1,31 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../lib/consts";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <div class="container">
+    <h1 class="text-3xl font-bold">Blog</h1>
+    <p class="text-gray-600">{SITE_DESCRIPTION}</p>
+    <ul class="mt-4">
+      {
+        posts.map((post: any) => (
+          <li class="mb-4">
+            <a
+              href={`/blog/${post.slug}`}
+              class="text-blue-500 hover:underline"
+            >
+              {post.data.title}
+            </a>
+            <p class="text-gray-500">{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
