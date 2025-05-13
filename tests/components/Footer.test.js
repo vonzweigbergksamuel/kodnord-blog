@@ -10,7 +10,7 @@ describe("BaseHead", () => {
       slots: {},
     });
 
-    expect(result).toContain("<footer");
+    expect(result).toContain("<footr");
     expect(result).toContain("</footer>");
   });
 
