@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
 
 const { title, description, image } = Astro.props;
 ---
@@ -9,9 +10,9 @@ const { title, description, image } = Astro.props;
   <head>
     <BaseHead title={title} description={description} image={image} />
   </head>
-  <body>
+  <body class="bg-background max-w-[1440px] mx-auto text-white relative">
+    <Header />
     <main>
-      <h1>Astro</h1>
       <slot />
     </main>
   </body>
