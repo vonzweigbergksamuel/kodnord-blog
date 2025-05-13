@@ -23,6 +23,13 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Trigger Netlify Build Hook
-        run: |
-          curl -X POST -d '{}' ${{ secrets.NETLIFY_BUILD_HOOK }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Install Netlify CLI
+        run: npm install netlify-cli --save-dev
+      - name: Build application
+        run: npm run build
+      - name: Deploy to Netlify
+        run: netlify deploy --dir "dist" --auth ${{secret.NETLIFY_AUTH_TOKEN}} --site ${{secret.NETLIFY_SITE_ID}} --prod
