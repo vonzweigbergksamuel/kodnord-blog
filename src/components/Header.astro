@@ -1,14 +1,45 @@
 ---
-
+const currentPath = Astro.url.pathname;
 ---
 
-<header>
-  <h1>My Website</h1>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
+<header
+  class="text-white max-w-5xl absolute top-0 left-1/2 transform -translate-x-1/2 w-full z-10"
+>
+  <nav class="flex flex-col md:flex-row justify-between items-center py-8">
+    <a href="/" class="text-2xl font-medium tracking-wider">KODNÖRD</a>
+    <ul
+      class="flex flex-col md:flex-row items-center gap-8 mt-4 md:mt-0 text-lg"
+    >
+      <li>
+        <a
+          href="/"
+          class={currentPath === "/"
+            ? "text-white"
+            : "text-white/70 hover:text-white transition"}
+        >
+          <span class="pr-1 tracking-tight">/ /</span> hem
+        </a>
+      </li>
+      <li>
+        <a href="/#projekt" class="text-white/70 hover:text-white transition">
+          <span class="pr-1 tracking-tight">/ /</span> projekt
+        </a>
+      </li>
+      <li>
+        <a
+          href="/blogg"
+          class={currentPath.startsWith("/blogg")
+            ? "text-white"
+            : "text-white/70 hover:text-white transition"}
+        >
+          <span class="pr-1 tracking-tight">/ /</span> blogg
+        </a>
+      </li>
+      <li>
+        <a href="/#kontakt" class="text-white/70 hover:text-white transition">
+          <span class="pr-1 tracking-tight">/ /</span> kontakt
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
