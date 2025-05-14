@@ -1,42 +1,10 @@
 ---
-
+import Kodnord3DText from "./Kodnord3dText.astro";
 ---
 
 <section
   id="om-mig"
-  class="relative h-screen text-white overflow-hidden flex justify-center items-center"
+  class="py-24 px-6 relative text-white flex flex-col items-center justify-center h-screen"
 >
-  <div
-    class="absolute -top-32 -left-40 w-[700px] h-[700px] bg-[--accent] opacity-20 blur-3xl rounded-full z-0 pointer-events-none"
-  >
-  </div>
-  <div class="relative m-auto text-center z-10">
-    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
-      👋 Hej, jag är <span class="text-[--accent]">Kodnörd</span><br />
-      <span
-        class="block text-transparent bg-clip-text bg-gradient-to-r from-[oklch(0.85_0.2_246.26)] to-[oklch(0.85_0.2_320)]"
-      >
-        webbutvecklare & kodentusiast
-      </span>
-    </h1>
-    <p class="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-      Jag bygger moderna webbapplikationer med fokus på ren kod, snygg design
-      och tillgänglighet.<br />
-      Just nu pluggar jag Webbprogrammering vid Linnéuniversitetet.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a
-        href="/#projekt"
-        class="px-6 py-3 rounded-lg bg-white text-black font-medium hover:bg-gray-200 transition"
-      >
-        Se mina projekt
-      </a>
-      <a
-        href="/#kontakt"
-        class="px-6 py-3 rounded-lg border border-white text-white font-medium hover:bg-white hover:text-black transition"
-      >
-        Kontakta mig
-      </a>
-    </div>
-  </div>
+  <Kodnord3DText />
 </section>
