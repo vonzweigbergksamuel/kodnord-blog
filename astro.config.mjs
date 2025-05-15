@@ -6,6 +6,8 @@ import mdx from "@astrojs/mdx";
 
 import netlify from "@astrojs/netlify";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://kodnord.netlify.app/",
@@ -13,6 +15,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap(), mdx()],
+  integrations: [sitemap(), mdx(), react()],
   adapter: netlify(),
 });
