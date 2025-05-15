@@ -37,7 +37,7 @@
     opacity: 0.2;
   }
   76% {
-    opacity: 0.4;
+    opacity: 0.3;
   }
   77% {
     opacity: 0;
@@ -46,46 +46,6 @@
 
 .animate-flicker {
   animation: flicker 2s linear 1;
-}
-
-@keyframes fillFlicker {
-  0% {
-    fill: white;
-  }
-  7% {
-    fill: oklch(0.54 0.2492 293.23);
-  }
-  8% {
-    fill: white;
-  }
-  9% {
-    fill: oklch(0.54 0.2492 293.23);
-  }
-  13% {
-    fill: white;
-  }
-  27% {
-    fill: oklch(0.54 0.2492 293.23);
-  }
-  28% {
-    fill: white;
-  }
-  49% {
-    fill: oklch(0.54 0.2492 293.23);
-  }
-  50% {
-    fill: white;
-  }
-  76% {
-    fill: oklch(0.54 0.2492 293.23);
-  }
-  77% {
-    fill: transparent;
-  }
-}
-
-.animate-fill-flicker path {
-  animation: fillFlicker 2s linear 1;
 }
 
 @theme inline {
