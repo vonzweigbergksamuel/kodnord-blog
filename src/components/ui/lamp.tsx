@@ -20,7 +20,7 @@ export const LampContainer = ({
         {/* Left side flicker beam */}
         <div
           style={{
-            width: "clamp(12rem, 30vw, 30rem)",
+            width: "clamp(10rem, 30vw, 30rem)",
             height: "clamp(6rem, 14vw, 14rem)",
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
@@ -33,7 +33,7 @@ export const LampContainer = ({
         {/* Right side flicker beam */}
         <div
           style={{
-            width: "clamp(12rem, 30vw, 30rem)",
+            width: "clamp(10rem, 30vw, 30rem)",
             height: "clamp(6rem, 14vw, 14rem)",
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
@@ -52,7 +52,7 @@ export const LampContainer = ({
         {/* Light glow */}
         <div
           style={{
-            width: "clamp(10rem, 36vw, 28rem)",
+            width: "clamp(8rem, 36vw, 28rem)",
             height: "clamp(5rem, 9vw, 9rem)",
           }}
           className="absolute inset-auto z-50 -translate-y-1/2 rounded-full bg-purple-400 opacity-50 blur-3xl animate-flicker"
@@ -61,7 +61,7 @@ export const LampContainer = ({
         {/* Core glow */}
         <div
           style={{
-            width: "clamp(8rem, 26vw, 16rem)",
+            width: "clamp(6rem, 26vw, 16rem)",
             height: "clamp(5rem, 9vw, 9rem)",
           }}
           className="absolute inset-auto z-30 -translate-y-[6rem] rounded-full bg-purple-400 blur-2xl animate-flicker"
@@ -69,7 +69,7 @@ export const LampContainer = ({
 
         {/* Center line */}
         <div
-          style={{ width: "clamp(12rem, 40vw, 30rem)" }}
+          style={{ width: "clamp(10rem, 40vw, 30rem)" }}
           className="absolute inset-auto z-50 h-0.5 -translate-y-[7rem] bg-purple-400"
         />
 
@@ -77,7 +77,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-background" />
 
         {/* Children content */}
-        <div className="relative z-50 flex translate-y-[0rem] sm:translate-y-[2rem] md:translate-y-[4rem] lg:translate-y-[6rem]">
+        <div className="relative z-50 flex -translate-y-[1.5rem] sm:translate-y-[1rem] md:translate-y-[3rem] lg:translate-y-[5rem]">
           {children}
         </div>
       </div>
