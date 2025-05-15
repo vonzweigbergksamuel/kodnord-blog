@@ -1,0 +1,37 @@
+---
+// Importen till LampContainer
+import { LampContainer } from "./ui/lamp";
+---
+
+<div
+  class="relative w-full h-full flex flex-col justify-center items-center overflow-hidden"
+>
+  <!-- Textcontainer -->
+  <div class="relative z-10 flex flex-col items-center">
+    <!-- Originaltext -->
+    <h1
+      class="font-jetbrains font-bold tracking-tighter text-[250px] text-white text-center"
+    >
+      KODNÖRD
+    </h1>
+
+    <!-- Reflektion -->
+    <h1
+      class="absolute top-1/2 left-1/2 text-[250px] font-bold tracking-tighter font-jetbrains text-purple-500/30 animate-flicker"
+      style="
+    transform: translateX(-50%) scaleY(-1) skewY(2deg);
+    text-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+    will-change: transform, opacity;
+    user-select: none;
+    pointer-events: none;
+  "
+    >
+      KODNÖRD
+    </h1>
+  </div>
+
+  <!-- Ljuseffekt -->
+  <LampContainer client:only="react" className="absolute -top-20 right-0 z-0" />
+</div>
