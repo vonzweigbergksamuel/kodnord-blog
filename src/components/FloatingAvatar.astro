@@ -1,0 +1,90 @@
+---
+
+---
+
+<div
+  id="avatar-container"
+  class="absolute inset-0 -right-96 z-30 pointer-events-none"
+>
+</div>
+
+<script>
+  import * as THREE from "three";
+
+  const container = document.getElementById("avatar-container");
+
+  if (container) {
+    const width = container.offsetWidth;
+    const height = container.offsetHeight;
+
+    // Ortografisk kamera = ingen perspektivförvrängning
+    const aspect = width / height;
+    const camera = new THREE.OrthographicCamera(
+      -aspect * 5,
+      aspect * 5,
+      5,
+      -5,
+      0.1,
+      1000
+    );
+    camera.position.z = 10;
+
+    const scene = new THREE.Scene();
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+
+    // Resize
+    window.addEventListener("resize", () => {
+      const newWidth = container.offsetWidth;
+      const newHeight = container.offsetHeight;
+      camera.left = -aspect * 5;
+      camera.right = aspect * 5;
+      camera.top = 5;
+      camera.bottom = -5;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
+    });
+
+    // Sphere
+    const geometry = new THREE.SphereGeometry(0.6, 64, 64);
+    const texture = new THREE.TextureLoader().load("/me.png");
+    const material = new THREE.MeshStandardMaterial({ map: texture });
+    const sphere = new THREE.Mesh(geometry, material);
+
+    // Position: top right of center
+    sphere.position.set(3.5, 2.5, 0);
+    scene.add(sphere);
+
+    // Light
+    const light = new THREE.PointLight(0xffffff, 10);
+    light.position.set(5, 5, 5);
+    scene.add(light);
+
+    // Interaktion: följ mus subtilt om nära sfären
+    document.addEventListener("mousemove", (e) => {
+      const rect = container.getBoundingClientRect();
+      const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const mouseY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      // Kolla avstånd till sfärens plats (ungefär)
+      const distance = Math.sqrt(
+        Math.pow(mouseX * aspect * 5 - sphere.position.x, 2) +
+          Math.pow(mouseY * 5 - sphere.position.y, 2)
+      );
+
+      if (distance < 2) {
+        sphere.rotation.y = (mouseX / 2) * Math.PI;
+        sphere.rotation.x = (mouseY / 2) * Math.PI;
+      }
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }
+</script>
