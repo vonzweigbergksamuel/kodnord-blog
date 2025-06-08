@@ -1,30 +1,13 @@
 ---
-import { LampContainer } from "./ui/lamp";
+import LampContainer from "./Lamp.astro";
 ---
 
 <div
-  class="absolute pb-40 w-full h-full flex flex-col justify-center items-center overflow-hidden"
+  class="absolute sm:pb-40 w-full h-full flex flex-col justify-center items-center overflow-hidden"
 >
-  <LampContainer client:only="react">
-    <h1
-      class="font-jetbrains font-extrabold tracking-tighter text-white text-center"
-      style="font-size: clamp(3rem, 16vw, 12rem);"
-    >
-      PORTFOLIO
-    </h1>
+  <LampContainer />
 
-    <h1
-      class="absolute top-1/2 left-1/2 font-jetbrains font-extrabold tracking-tighter text-purple-400 pointer-events-none opacity-40 select-none animate-flicker"
-      style="
-        font-size: clamp(3rem, 16vw, 12rem);
-        transform: translateX(-50%) scaleY(-1);
-        text-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
-        mask-image: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
-        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
-        will-change: transform, opacity;
-      "
-    >
-      PORTFOLIO
-    </h1>
-  </LampContainer>
+  <div class="absolute bottom-6 z-10 animate-bounce text-white opacity-60">
+    ↓ scroll
+  </div>
 </div>
