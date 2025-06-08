@@ -2,15 +2,51 @@
 const currentPath = Astro.url.pathname;
 ---
 
+<style>
+  #mobile-menu {
+    transform: translateY(-100%);
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
+  }
+
+  #mobile-menu.show {
+    transform: translateY(0);
+  }
+</style>
+
 <header
-  class="text-white max-w-5xl absolute top-0 left-1/2 transform -translate-x-1/2 w-full z-10"
+  class="text-white max-w-5xl absolute top-0 left-1/2 transform -translate-x-1/2 w-full z-50"
 >
-  <nav
-    class="flex flex-col sm:flex-row justify-between items-center py-8 px-8 lg:px-4"
-  >
-    <a href="/" class="text-2xl font-medium tracking-wider">KODNÖRD</a>
+  <nav class="flex justify-between items-center py-8 px-8 lg:px-4 relative">
+    <a href="/" class="text-2xl font-medium tracking-wider z-50">KODNÖRD</a>
+
+    <!-- Hamburger button (mobile only) -->
+    <button
+      id="menu-toggle"
+      class="sm:hidden z-50 text-white focus:outline-none"
+      aria-label="Toggle menu"
+    >
+      <svg
+        id="menu-icon"
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          id="menu-icon-path"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Mobile menu overlay -->
     <ul
-      class="flex flex-col sm:flex-row items-center gap-8 mt-4 sm:mt-0 text-lg"
+      id="mobile-menu"
+      class="fixed top-0 right-1/2 translate-x-1/2 bg-black/95 h-screen w-screen backdrop-blur-lg z-40 flex flex-col items-start pl-8 pt-30 justify-start gap-10 text-2xl sm:hidden opacity-0 pointer-events-none"
     >
       <li>
         <a
@@ -19,12 +55,12 @@ const currentPath = Astro.url.pathname;
             ? "text-white"
             : "text-white/70 hover:text-white transition"}
         >
-          <span class="pr-1 tracking-tight">/ /</span> hem
+          <span class="pr-1">//</span> hem
         </a>
       </li>
       <li>
         <a href="/#projekt" class="text-white/70 hover:text-white transition">
-          <span class="pr-1 tracking-tight">/ /</span> projekt
+          <span class="pr-1">//</span> projekt
         </a>
       </li>
       <li>
@@ -34,14 +70,85 @@ const currentPath = Astro.url.pathname;
             ? "text-white"
             : "text-white/70 hover:text-white transition"}
         >
-          <span class="pr-1 tracking-tight">/ /</span> blogg
+          <span class="pr-1">//</span> blogg
         </a>
       </li>
       <li>
         <a href="/#kontakt" class="text-white/70 hover:text-white transition">
-          <span class="pr-1 tracking-tight">/ /</span> kontakt
+          <span class="pr-1">//</span> kontakt
+        </a>
+      </li>
+    </ul>
+
+    <!-- Desktop menu -->
+    <ul class="hidden sm:flex items-center gap-8 text-lg">
+      <li>
+        <a
+          href="/"
+          class={currentPath === "/"
+            ? "text-white"
+            : "text-white/70 hover:text-white transition"}
+        >
+          <span class="pr-1">//</span> hem
+        </a>
+      </li>
+      <li>
+        <a href="/#projekt" class="text-white/70 hover:text-white transition">
+          <span class="pr-1">//</span> projekt
+        </a>
+      </li>
+      <li>
+        <a
+          href="/blogg"
+          class={currentPath.startsWith("/blogg")
+            ? "text-white"
+            : "text-white/70 hover:text-white transition"}
+        >
+          <span class="pr-1">//</span> blogg
+        </a>
+      </li>
+      <li>
+        <a href="/#kontakt" class="text-white/70 hover:text-white transition">
+          <span class="pr-1">//</span> kontakt
         </a>
       </li>
     </ul>
   </nav>
 </header>
+
+<script>
+  const toggleBtn = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const iconPath = document.getElementById("menu-icon-path");
+
+  function openMenu() {
+    if (menu) {
+      menu.classList.remove("opacity-0", "pointer-events-none");
+      menu.classList.add("opacity-100", "pointer-events-auto", "show");
+    }
+    if (iconPath) {
+      iconPath.setAttribute("d", "M6 18L18 6M6 6l12 12");
+    }
+  }
+
+  function closeMenu() {
+    if (menu) {
+      menu.classList.remove("opacity-100", "pointer-events-auto", "show");
+      menu.classList.add("opacity-0", "pointer-events-none");
+    }
+    if (iconPath) {
+      iconPath.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+    }
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = menu ? menu.classList.contains("opacity-100") : false;
+      isVisible ? closeMenu() : openMenu();
+    });
+  }
+
+  document.querySelectorAll("#mobile-menu a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+</script>
